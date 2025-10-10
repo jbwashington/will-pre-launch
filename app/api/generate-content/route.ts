@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { generateSocialContent, ContentGenerationParams } from '@/lib/claude-agent'
-import { createClient } from '@/lib/supabase/server'
+
+export const runtime = 'edge'
+
+interface Env {
+  DB: D1Database
+  ANTHROPIC_API_KEY: string
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,30 +29,33 @@ export async function POST(request: NextRequest) {
       length
     })
 
-    // Save to database
-    const supabase = await createClient()
-    const { data, error } = await supabase
-      .from('generated_content')
-      .insert({
-        content_type: platform,
-        prompt: JSON.stringify(body),
-        generated_text: generatedContent,
-        metadata: {
-          topic,
-          trendingKeywords,
-          tone,
-          length
-        }
-      })
-      .select()
-      .single()
+    // Save to D1 database
+    const env = (request as any).env as Env
+    if (!env || !env.DB) {
+      return NextResponse.json(
+        { error: 'Database not available' },
+        { status: 500 }
+      )
+    }
 
-    if (error) throw error
+    const db = env.DB
+    const id = crypto.randomUUID()
+
+    await db.prepare(`
+      INSERT INTO generated_content (id, content_type, prompt, generated_text, metadata)
+      VALUES (?, ?, ?, ?, ?)
+    `).bind(
+      id,
+      platform,
+      JSON.stringify(body),
+      generatedContent,
+      JSON.stringify({ topic, trendingKeywords, tone, length })
+    ).run()
 
     return NextResponse.json({
       success: true,
       content: generatedContent,
-      id: data.id
+      id
     })
   } catch (error: any) {
     console.error('Content generation error:', error)
@@ -62,20 +71,22 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const platform = searchParams.get('platform')
 
-    const supabase = await createClient()
-    let query = supabase
-      .from('generated_content')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(10)
-
-    if (platform) {
-      query = query.eq('content_type', platform)
+    const env = (request as any).env as Env
+    if (!env || !env.DB) {
+      return NextResponse.json(
+        { error: 'Database not available' },
+        { status: 500 }
+      )
     }
 
-    const { data, error } = await query
+    const db = env.DB
 
-    if (error) throw error
+    let query = 'SELECT * FROM generated_content ORDER BY created_at DESC LIMIT 10'
+    if (platform) {
+      query = `SELECT * FROM generated_content WHERE content_type = '${platform}' ORDER BY created_at DESC LIMIT 10`
+    }
+
+    const { results: data } = await db.prepare(query).all()
 
     return NextResponse.json({ success: true, data })
   } catch (error: any) {

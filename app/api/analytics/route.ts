@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+
+export const runtime = 'edge'
+
+interface Env {
+  DB: D1Database
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,16 +18,24 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const supabase = await createClient()
-    const { error } = await supabase
-      .from('analytics_events')
-      .insert({
-        event_type,
-        user_id: user_id || null,
-        metadata: metadata || {}
-      })
+    const env = (request as any).env as Env
+    if (!env || !env.DB) {
+      return NextResponse.json(
+        { error: 'Database not available' },
+        { status: 500 }
+      )
+    }
 
-    if (error) throw error
+    const db = env.DB
+
+    await db.prepare(`
+      INSERT INTO analytics_events (event_type, user_id, metadata)
+      VALUES (?, ?, ?)
+    `).bind(
+      event_type,
+      user_id || null,
+      JSON.stringify(metadata || {})
+    ).run()
 
     return NextResponse.json({ success: true })
   } catch (error: any) {
@@ -40,29 +53,32 @@ export async function GET(request: NextRequest) {
     const eventType = searchParams.get('event_type')
     const limit = parseInt(searchParams.get('limit') || '100')
 
-    const supabase = await createClient()
-    let query = supabase
-      .from('analytics_events')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(limit)
-
-    if (eventType) {
-      query = query.eq('event_type', eventType)
+    const env = (request as any).env as Env
+    if (!env || !env.DB) {
+      return NextResponse.json(
+        { error: 'Database not available' },
+        { status: 500 }
+      )
     }
 
-    const { data, error } = await query
+    const db = env.DB
 
-    if (error) throw error
+    // Get events
+    let query = `SELECT * FROM analytics_events ORDER BY created_at DESC LIMIT ${limit}`
+    if (eventType) {
+      query = `SELECT * FROM analytics_events WHERE event_type = '${eventType}' ORDER BY created_at DESC LIMIT ${limit}`
+    }
 
-    // Get some basic stats
-    const { count: totalEvents } = await supabase
-      .from('analytics_events')
-      .select('*', { count: 'exact', head: true })
+    const { results: data } = await db.prepare(query).all()
 
-    const { count: totalWaitlist } = await supabase
-      .from('waitlist')
-      .select('*', { count: 'exact', head: true })
+    // Get stats
+    const { total: totalEvents } = await db.prepare(
+      'SELECT COUNT(*) as total FROM analytics_events'
+    ).first() as any
+
+    const { total: totalWaitlist } = await db.prepare(
+      'SELECT COUNT(*) as total FROM waitlist'
+    ).first() as any
 
     return NextResponse.json({
       success: true,

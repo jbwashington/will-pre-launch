@@ -5,7 +5,6 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Loader2 } from "lucide-react"
-import { createClient } from "@/lib/supabase/client"
 
 interface WaitlistFormProps {
   onSuccess: (position: number, referralCode: string) => void
@@ -25,55 +24,32 @@ export function WaitlistForm({ onSuccess }: WaitlistFormProps) {
     setError(null)
 
     try {
-      const supabase = createClient()
-
       // Check if user was referred
       const urlParams = new URLSearchParams(window.location.search)
       const referralCode = urlParams.get('ref')
 
-      let referredBy = null
-      if (referralCode) {
-        const { data: referrer } = await supabase
-          .from('waitlist')
-          .select('id')
-          .eq('referral_code', referralCode)
-          .single()
-
-        referredBy = referrer?.id || null
-      }
-
-      // Insert the new waitlist entry
-      const { data, error: insertError } = await supabase
-        .from('waitlist')
-        .insert({
+      // Submit to the waitlist API
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           email,
           name: name || null,
           phone: phone || null,
           zip_code: zipCode || null,
-          referred_by: referredBy,
+          referred_by: referralCode || null
         })
-        .select()
-        .single()
-
-      if (insertError) throw insertError
-
-      // Track analytics event
-      await supabase.from('analytics_events').insert({
-        event_type: 'waitlist_join',
-        user_id: data.id,
-        metadata: {
-          referred: !!referredBy,
-          referral_code: referralCode
-        }
       })
 
-      onSuccess(data.position || 0, data.referral_code)
-    } catch (err: any) {
-      if (err.code === '23505') {
-        setError('This email is already on the waitlist!')
-      } else {
-        setError(err.message || 'Something went wrong. Please try again.')
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to join waitlist')
       }
+
+      onSuccess(result.data.position || 0, result.data.referral_code)
+    } catch (err: any) {
+      setError(err.message || 'Something went wrong. Please try again.')
     } finally {
       setLoading(false)
     }

@@ -1,6 +1,15 @@
 # Will's Exotic Snacks - Pre-Launch Waitlist
 
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+[![Supabase](https://img.shields.io/badge/Supabase-Ready-green)](https://supabase.com/)
+[![Claude AI](https://img.shields.io/badge/Claude-3.5_Sonnet-purple)](https://anthropic.com/)
+[![Bun](https://img.shields.io/badge/Bun-1.2-orange)](https://bun.sh/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A viral waitlist landing page for Will's Exotic Snacks, NYC's hottest exotic snack delivery service. Built with Next.js 15, Supabase, and Claude AI for automated content generation.
+
+![Will's Exotic Snacks](https://img.shields.io/badge/Status-Ready_to_Launch-brightgreen)
 
 ## Features
 

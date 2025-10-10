@@ -39,11 +39,14 @@ Set these build configurations:
 - **Environment variables** (add these):
 
 ```
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+# Required for content generation dashboard
 ANTHROPIC_API_KEY=your_anthropic_key
-NODE_VERSION=18
+
+# Optional - for AI-powered shop product generation
+# If not provided, app uses template-based fallbacks
+NEXT_PUBLIC_HUGGINGFACE_API_KEY=your_huggingface_key
+
+# Database (D1) is auto-configured via wrangler.toml - no env vars needed!
 ```
 
 ### Step 4: Deploy
@@ -107,13 +110,15 @@ wrangler pages deploy .next --project-name=will-exotic-snacks
 
 ```bash
 # Set environment variables for production
-wrangler pages secret put NEXT_PUBLIC_SUPABASE_URL --project-name=will-exotic-snacks
-wrangler pages secret put NEXT_PUBLIC_SUPABASE_ANON_KEY --project-name=will-exotic-snacks
-wrangler pages secret put SUPABASE_SERVICE_ROLE_KEY --project-name=will-exotic-snacks
+# Required: For content generation dashboard
 wrangler pages secret put ANTHROPIC_API_KEY --project-name=will-exotic-snacks
+
+# Optional: For AI-powered shop (uses fallbacks if not set)
+wrangler pages secret put NEXT_PUBLIC_HUGGINGFACE_API_KEY --project-name=will-exotic-snacks
 
 # Or set via dashboard:
 # Go to Pages project > Settings > Environment variables
+# Database (D1) is automatically bound via wrangler.toml - no secrets needed!
 ```
 
 ## Option 3: Continuous Deployment (Best for Production)

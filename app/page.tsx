@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import confetti from "canvas-confetti"
-import { Sparkles, Users, Gift, Share2, TrendingUp } from "lucide-react"
+import { Sparkles, Users, Gift, Share2, TrendingUp, ShoppingBag } from "lucide-react"
 import { WaitlistForm } from "@/components/waitlist-form"
 import { ShareDialog } from "@/components/share-dialog"
 
@@ -72,16 +72,29 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
+                className="space-y-4"
               >
                 {!showWaitlist ? (
-                  <Button
-                    onClick={() => setShowWaitlist(true)}
-                    size="lg"
-                    className="text-lg px-8 py-6 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 shadow-xl"
-                  >
-                    Join the Waitlist
-                    <Users className="ml-2 w-5 h-5" />
-                  </Button>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <Button
+                      onClick={() => setShowWaitlist(true)}
+                      size="lg"
+                      className="text-lg px-8 py-6 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 shadow-xl"
+                    >
+                      Join the Waitlist
+                      <Users className="ml-2 w-5 h-5" />
+                    </Button>
+                    <Button
+                      onClick={() => window.location.href = '/shop'}
+                      size="lg"
+                      variant="outline"
+                      className="text-lg px-8 py-6 border-2 border-orange-600 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20"
+                    >
+                      <ShoppingBag className="mr-2 w-5 h-5" />
+                      Browse Imaginary Shop
+                      <Sparkles className="ml-2 w-4 h-4" />
+                    </Button>
+                  </div>
                 ) : (
                   <WaitlistForm onSuccess={handleJoinSuccess} />
                 )}

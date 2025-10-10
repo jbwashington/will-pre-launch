@@ -2,8 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  // Note: "output: export" disabled due to dynamic routes in /shop/[id]
-  // Cloudflare Pages supports dynamic SSR with Edge Runtime
+  output: "export",
   eslint: {
     ignoreDuringBuilds: true,
   },

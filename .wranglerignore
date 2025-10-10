@@ -1,0 +1,6 @@
+# Exclude cache directories
+.next/cache/
+
+# Exclude build artifacts that aren't needed
+*.tsbuildinfo
+.DS_Store

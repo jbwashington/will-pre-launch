@@ -2472,5 +2472,513 @@
         }
       ]
     }
+  },
+  {
+    "session_id": "13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f",
+    "transcript_path": "/Users/jbwashington/.claude/projects/-Users-jbwashington-Developer-projects-will-pre-launch/13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f.jsonl",
+    "cwd": "/Users/jbwashington/Developer/projects/will-pre-launch",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "git init && git add . && git commit -m \"Initial commit: Will's Exotic Snacks pre-launch waitlist platform with AI content generation\"",
+      "description": "Initialize Git repository and create initial commit"
+    },
+    "tool_response": {
+      "stdout": "Initialized empty Git repository in /Users/jbwashington/Developer/projects/will-pre-launch/.git/\n[main (root-commit) 281150a] Initial commit: Will's Exotic Snacks pre-launch waitlist platform with AI content generation\n 33 files changed, 11252 insertions(+)\n create mode 100644 .gitignore\n create mode 100644 README.md\n create mode 100644 app/api/analytics/route.ts\n create mode 100644 app/api/generate-content/route.ts\n create mode 100644 app/dashboard/page.tsx\n create mode 100644 app/favicon.ico\n create mode 100644 app/globals.css\n create mode 100644 app/layout.tsx\n create mode 100644 app/page.tsx\n create mode 100644 components.json\n create mode 100644 components/share-dialog.tsx\n create mode 100644 components/ui/button.tsx\n create mode 100644 components/ui/input.tsx\n create mode 100644 components/waitlist-form.tsx\n create mode 100644 eslint.config.mjs\n create mode 100644 lib/claude-agent.ts\n create mode 100644 lib/supabase/client.ts\n create mode 100644 lib/supabase/server.ts\n create mode 100644 lib/utils.ts\n create mode 100644 logs/post_tool_use.json\n create mode 100644 next.config.ts\n create mode 100644 package-lock.json\n create mode 100644 package.json\n create mode 100644 postcss.config.mjs\n create mode 100644 public/file.svg\n create mode 100644 public/globe.svg\n create mode 100644 public/next.svg\n create mode 100644 public/vercel.svg\n create mode 100644 public/window.svg\n create mode 100644 supabase/schema.sql\n create mode 100644 tsconfig.json\n create mode 100644 types/supabase.ts\n create mode 100644 vercel.json",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    }
+  },
+  {
+    "session_id": "13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f",
+    "transcript_path": "/Users/jbwashington/.claude/projects/-Users-jbwashington-Developer-projects-will-pre-launch/13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f.jsonl",
+    "cwd": "/Users/jbwashington/Developer/projects/will-pre-launch",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Examine tatlist-app structure to understand the pattern",
+          "status": "completed",
+          "activeForm": "Examining tatlist-app structure"
+        },
+        {
+          "content": "Set up new Next.js project structure for Will the Barber pre-launch site",
+          "status": "completed",
+          "activeForm": "Setting up Next.js project structure"
+        },
+        {
+          "content": "Install dependencies (Supabase, shadcn/ui, Anthropic SDK, Framer Motion)",
+          "status": "completed",
+          "activeForm": "Installing project dependencies"
+        },
+        {
+          "content": "Create project utilities and base components",
+          "status": "completed",
+          "activeForm": "Creating project utilities and components"
+        },
+        {
+          "content": "Configure Supabase for waitlist management and analytics",
+          "status": "completed",
+          "activeForm": "Configuring Supabase"
+        },
+        {
+          "content": "Build waitlist landing page with viral sharing features",
+          "status": "completed",
+          "activeForm": "Building waitlist landing page"
+        },
+        {
+          "content": "Set up Claude Code Agent SDK for content generation",
+          "status": "completed",
+          "activeForm": "Setting up Claude Code Agent SDK"
+        },
+        {
+          "content": "Create API routes for analytics and content generation",
+          "status": "completed",
+          "activeForm": "Creating API routes"
+        },
+        {
+          "content": "Create content generation dashboard",
+          "status": "completed",
+          "activeForm": "Creating content generation dashboard"
+        },
+        {
+          "content": "Create documentation and README",
+          "status": "completed",
+          "activeForm": "Creating documentation"
+        },
+        {
+          "content": "Initialize Git repository",
+          "status": "completed",
+          "activeForm": "Initializing Git repository"
+        },
+        {
+          "content": "Test local development server",
+          "status": "in_progress",
+          "activeForm": "Testing local development server"
+        }
+      ]
+    },
+    "tool_response": {
+      "oldTodos": [
+        {
+          "content": "Examine tatlist-app structure to understand the pattern",
+          "status": "completed",
+          "activeForm": "Examining tatlist-app structure"
+        },
+        {
+          "content": "Set up new Next.js project structure for Will the Barber pre-launch site",
+          "status": "completed",
+          "activeForm": "Setting up Next.js project structure"
+        },
+        {
+          "content": "Install dependencies (Supabase, shadcn/ui, Anthropic SDK, Framer Motion)",
+          "status": "completed",
+          "activeForm": "Installing project dependencies"
+        },
+        {
+          "content": "Create project utilities and base components",
+          "status": "completed",
+          "activeForm": "Creating project utilities and components"
+        },
+        {
+          "content": "Configure Supabase for waitlist management and analytics",
+          "status": "completed",
+          "activeForm": "Configuring Supabase"
+        },
+        {
+          "content": "Build waitlist landing page with viral sharing features",
+          "status": "completed",
+          "activeForm": "Building waitlist landing page"
+        },
+        {
+          "content": "Set up Claude Code Agent SDK for content generation",
+          "status": "completed",
+          "activeForm": "Setting up Claude Code Agent SDK"
+        },
+        {
+          "content": "Create API routes for analytics and content generation",
+          "status": "completed",
+          "activeForm": "Creating API routes"
+        },
+        {
+          "content": "Create content generation dashboard",
+          "status": "completed",
+          "activeForm": "Creating content generation dashboard"
+        },
+        {
+          "content": "Create documentation and README",
+          "status": "completed",
+          "activeForm": "Creating documentation"
+        },
+        {
+          "content": "Initialize Git repository",
+          "status": "in_progress",
+          "activeForm": "Initializing Git repository"
+        },
+        {
+          "content": "Test local development server",
+          "status": "pending",
+          "activeForm": "Testing local development server"
+        }
+      ],
+      "newTodos": [
+        {
+          "content": "Examine tatlist-app structure to understand the pattern",
+          "status": "completed",
+          "activeForm": "Examining tatlist-app structure"
+        },
+        {
+          "content": "Set up new Next.js project structure for Will the Barber pre-launch site",
+          "status": "completed",
+          "activeForm": "Setting up Next.js project structure"
+        },
+        {
+          "content": "Install dependencies (Supabase, shadcn/ui, Anthropic SDK, Framer Motion)",
+          "status": "completed",
+          "activeForm": "Installing project dependencies"
+        },
+        {
+          "content": "Create project utilities and base components",
+          "status": "completed",
+          "activeForm": "Creating project utilities and components"
+        },
+        {
+          "content": "Configure Supabase for waitlist management and analytics",
+          "status": "completed",
+          "activeForm": "Configuring Supabase"
+        },
+        {
+          "content": "Build waitlist landing page with viral sharing features",
+          "status": "completed",
+          "activeForm": "Building waitlist landing page"
+        },
+        {
+          "content": "Set up Claude Code Agent SDK for content generation",
+          "status": "completed",
+          "activeForm": "Setting up Claude Code Agent SDK"
+        },
+        {
+          "content": "Create API routes for analytics and content generation",
+          "status": "completed",
+          "activeForm": "Creating API routes"
+        },
+        {
+          "content": "Create content generation dashboard",
+          "status": "completed",
+          "activeForm": "Creating content generation dashboard"
+        },
+        {
+          "content": "Create documentation and README",
+          "status": "completed",
+          "activeForm": "Creating documentation"
+        },
+        {
+          "content": "Initialize Git repository",
+          "status": "completed",
+          "activeForm": "Initializing Git repository"
+        },
+        {
+          "content": "Test local development server",
+          "status": "in_progress",
+          "activeForm": "Testing local development server"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f",
+    "transcript_path": "/Users/jbwashington/.claude/projects/-Users-jbwashington-Developer-projects-will-pre-launch/13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f.jsonl",
+    "cwd": "/Users/jbwashington/Developer/projects/will-pre-launch",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "npm run dev",
+      "timeout": 10000,
+      "description": "Start Next.js development server",
+      "run_in_background": true
+    },
+    "tool_response": {
+      "stdout": "",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false,
+      "backgroundTaskId": "c7eda3"
+    }
+  },
+  {
+    "session_id": "13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f",
+    "transcript_path": "/Users/jbwashington/.claude/projects/-Users-jbwashington-Developer-projects-will-pre-launch/13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f.jsonl",
+    "cwd": "/Users/jbwashington/Developer/projects/will-pre-launch",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "BashOutput",
+    "tool_input": {
+      "bash_id": "c7eda3"
+    },
+    "tool_response": {
+      "shellId": "c7eda3",
+      "command": "npm run dev",
+      "status": "running",
+      "exitCode": null,
+      "stdout": "> will-pre-launch@0.1.0 dev\n> next dev --turbopack\n\n   ▲ Next.js 15.5.4 (Turbopack)\n   - Local:        http://localhost:3000\n   - Network:      http://192.168.1.201:3000\n   - Environments: .env.local\n\n ✓ Starting...\n ✓ Ready in 908ms",
+      "stderr": "",
+      "stdoutLines": 11,
+      "stderrLines": 1,
+      "timestamp": "2025-10-10T01:36:15.961Z"
+    }
+  },
+  {
+    "session_id": "13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f",
+    "transcript_path": "/Users/jbwashington/.claude/projects/-Users-jbwashington-Developer-projects-will-pre-launch/13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f.jsonl",
+    "cwd": "/Users/jbwashington/Developer/projects/will-pre-launch",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "sleep 5",
+      "description": "Wait for server to start"
+    },
+    "tool_response": {
+      "stdout": "",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    }
+  },
+  {
+    "session_id": "13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f",
+    "transcript_path": "/Users/jbwashington/.claude/projects/-Users-jbwashington-Developer-projects-will-pre-launch/13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f.jsonl",
+    "cwd": "/Users/jbwashington/Developer/projects/will-pre-launch",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "KillShell",
+    "tool_input": {
+      "shell_id": "c7eda3"
+    },
+    "tool_response": {
+      "message": "Successfully killed shell: c7eda3 (npm run dev)",
+      "shell_id": "c7eda3"
+    }
+  },
+  {
+    "session_id": "13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f",
+    "transcript_path": "/Users/jbwashington/.claude/projects/-Users-jbwashington-Developer-projects-will-pre-launch/13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f.jsonl",
+    "cwd": "/Users/jbwashington/Developer/projects/will-pre-launch",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "TodoWrite",
+    "tool_input": {
+      "todos": [
+        {
+          "content": "Examine tatlist-app structure to understand the pattern",
+          "status": "completed",
+          "activeForm": "Examining tatlist-app structure"
+        },
+        {
+          "content": "Set up new Next.js project structure for Will the Barber pre-launch site",
+          "status": "completed",
+          "activeForm": "Setting up Next.js project structure"
+        },
+        {
+          "content": "Install dependencies (Supabase, shadcn/ui, Anthropic SDK, Framer Motion)",
+          "status": "completed",
+          "activeForm": "Installing project dependencies"
+        },
+        {
+          "content": "Create project utilities and base components",
+          "status": "completed",
+          "activeForm": "Creating project utilities and components"
+        },
+        {
+          "content": "Configure Supabase for waitlist management and analytics",
+          "status": "completed",
+          "activeForm": "Configuring Supabase"
+        },
+        {
+          "content": "Build waitlist landing page with viral sharing features",
+          "status": "completed",
+          "activeForm": "Building waitlist landing page"
+        },
+        {
+          "content": "Set up Claude Code Agent SDK for content generation",
+          "status": "completed",
+          "activeForm": "Setting up Claude Code Agent SDK"
+        },
+        {
+          "content": "Create API routes for analytics and content generation",
+          "status": "completed",
+          "activeForm": "Creating API routes"
+        },
+        {
+          "content": "Create content generation dashboard",
+          "status": "completed",
+          "activeForm": "Creating content generation dashboard"
+        },
+        {
+          "content": "Create documentation and README",
+          "status": "completed",
+          "activeForm": "Creating documentation"
+        },
+        {
+          "content": "Initialize Git repository",
+          "status": "completed",
+          "activeForm": "Initializing Git repository"
+        },
+        {
+          "content": "Test local development server",
+          "status": "completed",
+          "activeForm": "Testing local development server"
+        }
+      ]
+    },
+    "tool_response": {
+      "oldTodos": [
+        {
+          "content": "Examine tatlist-app structure to understand the pattern",
+          "status": "completed",
+          "activeForm": "Examining tatlist-app structure"
+        },
+        {
+          "content": "Set up new Next.js project structure for Will the Barber pre-launch site",
+          "status": "completed",
+          "activeForm": "Setting up Next.js project structure"
+        },
+        {
+          "content": "Install dependencies (Supabase, shadcn/ui, Anthropic SDK, Framer Motion)",
+          "status": "completed",
+          "activeForm": "Installing project dependencies"
+        },
+        {
+          "content": "Create project utilities and base components",
+          "status": "completed",
+          "activeForm": "Creating project utilities and components"
+        },
+        {
+          "content": "Configure Supabase for waitlist management and analytics",
+          "status": "completed",
+          "activeForm": "Configuring Supabase"
+        },
+        {
+          "content": "Build waitlist landing page with viral sharing features",
+          "status": "completed",
+          "activeForm": "Building waitlist landing page"
+        },
+        {
+          "content": "Set up Claude Code Agent SDK for content generation",
+          "status": "completed",
+          "activeForm": "Setting up Claude Code Agent SDK"
+        },
+        {
+          "content": "Create API routes for analytics and content generation",
+          "status": "completed",
+          "activeForm": "Creating API routes"
+        },
+        {
+          "content": "Create content generation dashboard",
+          "status": "completed",
+          "activeForm": "Creating content generation dashboard"
+        },
+        {
+          "content": "Create documentation and README",
+          "status": "completed",
+          "activeForm": "Creating documentation"
+        },
+        {
+          "content": "Initialize Git repository",
+          "status": "completed",
+          "activeForm": "Initializing Git repository"
+        },
+        {
+          "content": "Test local development server",
+          "status": "in_progress",
+          "activeForm": "Testing local development server"
+        }
+      ],
+      "newTodos": [
+        {
+          "content": "Examine tatlist-app structure to understand the pattern",
+          "status": "completed",
+          "activeForm": "Examining tatlist-app structure"
+        },
+        {
+          "content": "Set up new Next.js project structure for Will the Barber pre-launch site",
+          "status": "completed",
+          "activeForm": "Setting up Next.js project structure"
+        },
+        {
+          "content": "Install dependencies (Supabase, shadcn/ui, Anthropic SDK, Framer Motion)",
+          "status": "completed",
+          "activeForm": "Installing project dependencies"
+        },
+        {
+          "content": "Create project utilities and base components",
+          "status": "completed",
+          "activeForm": "Creating project utilities and components"
+        },
+        {
+          "content": "Configure Supabase for waitlist management and analytics",
+          "status": "completed",
+          "activeForm": "Configuring Supabase"
+        },
+        {
+          "content": "Build waitlist landing page with viral sharing features",
+          "status": "completed",
+          "activeForm": "Building waitlist landing page"
+        },
+        {
+          "content": "Set up Claude Code Agent SDK for content generation",
+          "status": "completed",
+          "activeForm": "Setting up Claude Code Agent SDK"
+        },
+        {
+          "content": "Create API routes for analytics and content generation",
+          "status": "completed",
+          "activeForm": "Creating API routes"
+        },
+        {
+          "content": "Create content generation dashboard",
+          "status": "completed",
+          "activeForm": "Creating content generation dashboard"
+        },
+        {
+          "content": "Create documentation and README",
+          "status": "completed",
+          "activeForm": "Creating documentation"
+        },
+        {
+          "content": "Initialize Git repository",
+          "status": "completed",
+          "activeForm": "Initializing Git repository"
+        },
+        {
+          "content": "Test local development server",
+          "status": "completed",
+          "activeForm": "Testing local development server"
+        }
+      ]
+    }
+  },
+  {
+    "session_id": "13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f",
+    "transcript_path": "/Users/jbwashington/.claude/projects/-Users-jbwashington-Developer-projects-will-pre-launch/13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f.jsonl",
+    "cwd": "/Users/jbwashington/Developer/projects/will-pre-launch",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Write",
+    "tool_input": {
+      "file_path": "/Users/jbwashington/Developer/projects/will-pre-launch/DEPLOYMENT.md",
+      "content": "# Deployment Guide\n\n## Quick Start Deployment\n\n### 1. Supabase Setup (Database)\n\n1. **Create Supabase Project**\n   - Go to [supabase.com](https://supabase.com)\n   - Click \"New Project\"\n   - Choose organization and name your project \"will-exotic-snacks\"\n\n2. **Run Database Migration**\n\n   Option A: Using Supabase CLI\n   ```bash\n   # Install Supabase CLI\n   npm install -g supabase\n\n   # Login to Supabase\n   supabase login\n\n   # Link your project\n   supabase link --project-ref YOUR_PROJECT_REF\n\n   # Push schema to database\n   supabase db push\n   ```\n\n   Option B: Manual SQL execution\n   - Go to SQL Editor in Supabase Dashboard\n   - Copy the contents of `supabase/schema.sql`\n   - Paste and run the SQL\n\n3. **Get API Keys**\n   - Go to Project Settings > API\n   - Copy:\n     - `Project URL` → `NEXT_PUBLIC_SUPABASE_URL`\n     - `anon/public key` → `NEXT_PUBLIC_SUPABASE_ANON_KEY`\n     - `service_role key` → `SUPABASE_SERVICE_ROLE_KEY`\n\n### 2. Anthropic API Setup\n\n1. Go to [console.anthropic.com](https://console.anthropic.com)\n2. Create an API key\n3. Copy the key → `ANTHROPIC_API_KEY`\n\n### 3. Vercel Deployment\n\n**Option A: Using Vercel CLI**\n\n```bash\n# Install Vercel CLI\nnpm i -g vercel\n\n# Login\nvercel login\n\n# Deploy to preview\nvercel\n\n# Set environment variables\nvercel env add NEXT_PUBLIC_SUPABASE_URL production\nvercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY production\nvercel env add SUPABASE_SERVICE_ROLE_KEY production\nvercel env add ANTHROPIC_API_KEY production\n\n# Deploy to production\nvercel --prod\n```\n\n**Option B: Using Vercel Dashboard**\n\n1. Go to [vercel.com](https://vercel.com)\n2. Click \"New Project\"\n3. Import your Git repository\n4. Configure:\n   - Framework Preset: Next.js\n   - Root Directory: `./`\n   - Build Command: `npm run build`\n   - Output Directory: `.next`\n\n5. Add Environment Variables:\n   ```\n   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url\n   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key\n   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key\n   ANTHROPIC_API_KEY=your_anthropic_key\n   NEXT_PUBLIC_APP_URL=https://your-domain.vercel.app\n   ```\n\n6. Click \"Deploy\"\n\n### 4. Post-Deployment\n\n1. **Test the Waitlist**\n   - Visit your deployed URL\n   - Join the waitlist with a test email\n   - Check Supabase database to verify entry\n\n2. **Test Content Generation**\n   - Visit `/dashboard`\n   - Generate content for each platform\n   - Verify content appears in database\n\n3. **Test Referrals**\n   - Join waitlist and get referral code\n   - Share referral link\n   - Join with a different email using referral link\n   - Verify referral tracking in database\n\n### 5. Custom Domain (Optional)\n\n1. In Vercel Dashboard:\n   - Go to Project Settings > Domains\n   - Add your custom domain\n   - Follow DNS configuration instructions\n\n2. Update environment variable:\n   ```bash\n   vercel env add NEXT_PUBLIC_APP_URL production\n   # Enter: https://yourdomain.com\n   ```\n\n## Environment Variables Summary\n\n| Variable | Description | Where to get |\n|----------|-------------|--------------|\n| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL | Supabase Dashboard > Settings > API |\n| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public key | Supabase Dashboard > Settings > API |\n| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key | Supabase Dashboard > Settings > API |\n| `ANTHROPIC_API_KEY` | Claude API key | console.anthropic.com |\n| `NEXT_PUBLIC_APP_URL` | Your app URL | Your Vercel deployment URL |\n\n## Troubleshooting\n\n### Build Fails\n\n1. Check all environment variables are set correctly\n2. Ensure all dependencies are installed:\n   ```bash\n   rm -rf node_modules package-lock.json\n   npm install\n   ```\n\n### Supabase Connection Issues\n\n1. Verify API keys in environment variables\n2. Check RLS policies are enabled:\n   ```sql\n   SELECT * FROM pg_policies WHERE tablename = 'waitlist';\n   ```\n\n### Content Generation Fails\n\n1. Verify `ANTHROPIC_API_KEY` is set\n2. Check API key has credits\n3. Check Vercel function logs for errors\n\n## Monitoring\n\n### Vercel Analytics\n- Go to your project in Vercel\n- Click \"Analytics\" to see traffic and performance\n\n### Supabase Monitoring\n- Database: Monitor query performance\n- Auth: Track authentication events\n- Logs: View real-time database logs\n\n## Next Steps\n\n1. **Set up monitoring alerts** in Vercel and Supabase\n2. **Configure custom domain** for professional branding\n3. **Set up email notifications** for new waitlist signups\n4. **Create social media accounts** and link referral tracking\n5. **Launch marketing campaigns** using AI-generated content\n\n## Support\n\nFor deployment issues:\n- Check Vercel deployment logs\n- Check Supabase logs\n- Review Next.js build output\n- Consult README.md for detailed documentation\n"
+    },
+    "tool_response": {
+      "type": "create",
+      "filePath": "/Users/jbwashington/Developer/projects/will-pre-launch/DEPLOYMENT.md",
+      "content": "# Deployment Guide\n\n## Quick Start Deployment\n\n### 1. Supabase Setup (Database)\n\n1. **Create Supabase Project**\n   - Go to [supabase.com](https://supabase.com)\n   - Click \"New Project\"\n   - Choose organization and name your project \"will-exotic-snacks\"\n\n2. **Run Database Migration**\n\n   Option A: Using Supabase CLI\n   ```bash\n   # Install Supabase CLI\n   npm install -g supabase\n\n   # Login to Supabase\n   supabase login\n\n   # Link your project\n   supabase link --project-ref YOUR_PROJECT_REF\n\n   # Push schema to database\n   supabase db push\n   ```\n\n   Option B: Manual SQL execution\n   - Go to SQL Editor in Supabase Dashboard\n   - Copy the contents of `supabase/schema.sql`\n   - Paste and run the SQL\n\n3. **Get API Keys**\n   - Go to Project Settings > API\n   - Copy:\n     - `Project URL` → `NEXT_PUBLIC_SUPABASE_URL`\n     - `anon/public key` → `NEXT_PUBLIC_SUPABASE_ANON_KEY`\n     - `service_role key` → `SUPABASE_SERVICE_ROLE_KEY`\n\n### 2. Anthropic API Setup\n\n1. Go to [console.anthropic.com](https://console.anthropic.com)\n2. Create an API key\n3. Copy the key → `ANTHROPIC_API_KEY`\n\n### 3. Vercel Deployment\n\n**Option A: Using Vercel CLI**\n\n```bash\n# Install Vercel CLI\nnpm i -g vercel\n\n# Login\nvercel login\n\n# Deploy to preview\nvercel\n\n# Set environment variables\nvercel env add NEXT_PUBLIC_SUPABASE_URL production\nvercel env add NEXT_PUBLIC_SUPABASE_ANON_KEY production\nvercel env add SUPABASE_SERVICE_ROLE_KEY production\nvercel env add ANTHROPIC_API_KEY production\n\n# Deploy to production\nvercel --prod\n```\n\n**Option B: Using Vercel Dashboard**\n\n1. Go to [vercel.com](https://vercel.com)\n2. Click \"New Project\"\n3. Import your Git repository\n4. Configure:\n   - Framework Preset: Next.js\n   - Root Directory: `./`\n   - Build Command: `npm run build`\n   - Output Directory: `.next`\n\n5. Add Environment Variables:\n   ```\n   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url\n   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key\n   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key\n   ANTHROPIC_API_KEY=your_anthropic_key\n   NEXT_PUBLIC_APP_URL=https://your-domain.vercel.app\n   ```\n\n6. Click \"Deploy\"\n\n### 4. Post-Deployment\n\n1. **Test the Waitlist**\n   - Visit your deployed URL\n   - Join the waitlist with a test email\n   - Check Supabase database to verify entry\n\n2. **Test Content Generation**\n   - Visit `/dashboard`\n   - Generate content for each platform\n   - Verify content appears in database\n\n3. **Test Referrals**\n   - Join waitlist and get referral code\n   - Share referral link\n   - Join with a different email using referral link\n   - Verify referral tracking in database\n\n### 5. Custom Domain (Optional)\n\n1. In Vercel Dashboard:\n   - Go to Project Settings > Domains\n   - Add your custom domain\n   - Follow DNS configuration instructions\n\n2. Update environment variable:\n   ```bash\n   vercel env add NEXT_PUBLIC_APP_URL production\n   # Enter: https://yourdomain.com\n   ```\n\n## Environment Variables Summary\n\n| Variable | Description | Where to get |\n|----------|-------------|--------------|\n| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL | Supabase Dashboard > Settings > API |\n| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase public key | Supabase Dashboard > Settings > API |\n| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key | Supabase Dashboard > Settings > API |\n| `ANTHROPIC_API_KEY` | Claude API key | console.anthropic.com |\n| `NEXT_PUBLIC_APP_URL` | Your app URL | Your Vercel deployment URL |\n\n## Troubleshooting\n\n### Build Fails\n\n1. Check all environment variables are set correctly\n2. Ensure all dependencies are installed:\n   ```bash\n   rm -rf node_modules package-lock.json\n   npm install\n   ```\n\n### Supabase Connection Issues\n\n1. Verify API keys in environment variables\n2. Check RLS policies are enabled:\n   ```sql\n   SELECT * FROM pg_policies WHERE tablename = 'waitlist';\n   ```\n\n### Content Generation Fails\n\n1. Verify `ANTHROPIC_API_KEY` is set\n2. Check API key has credits\n3. Check Vercel function logs for errors\n\n## Monitoring\n\n### Vercel Analytics\n- Go to your project in Vercel\n- Click \"Analytics\" to see traffic and performance\n\n### Supabase Monitoring\n- Database: Monitor query performance\n- Auth: Track authentication events\n- Logs: View real-time database logs\n\n## Next Steps\n\n1. **Set up monitoring alerts** in Vercel and Supabase\n2. **Configure custom domain** for professional branding\n3. **Set up email notifications** for new waitlist signups\n4. **Create social media accounts** and link referral tracking\n5. **Launch marketing campaigns** using AI-generated content\n\n## Support\n\nFor deployment issues:\n- Check Vercel deployment logs\n- Check Supabase logs\n- Review Next.js build output\n- Consult README.md for detailed documentation\n",
+      "structuredPatch": []
+    }
   }
 ]

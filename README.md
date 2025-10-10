@@ -25,7 +25,7 @@ A viral waitlist landing page for Will's Exotic Snacks, NYC's hottest exotic sna
 
 ### Prerequisites
 
-- Node.js 18+
+- Bun 1.0+ (or Node.js 18+)
 - Supabase account
 - Anthropic API key
 - Vercel account (for deployment)
@@ -34,13 +34,13 @@ A viral waitlist landing page for Will's Exotic Snacks, NYC's hottest exotic sna
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/will-pre-launch.git
+git clone https://github.com/jbwashington/will-pre-launch.git
 cd will-pre-launch
 ```
 
 2. Install dependencies:
 ```bash
-npm install
+bun install
 ```
 
 3. Set up environment variables:
@@ -57,7 +57,7 @@ Edit `.env.local` with your credentials.
 2. Run the database migration:
 ```bash
 # Install Supabase CLI if you haven't
-npm install -g supabase
+bun install -g supabase
 
 # Link your project
 supabase link --project-ref your-project-ref
@@ -75,7 +75,7 @@ Or manually run the SQL in `supabase/schema.sql` in the Supabase SQL editor.
 Run the development server:
 
 ```bash
-npm run dev
+bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the app.
@@ -86,7 +86,7 @@ Open [http://localhost:3000](http://localhost:3000) to see the app.
 
 1. Install Vercel CLI:
 ```bash
-npm i -g vercel
+bun install -g vercel
 ```
 
 2. Deploy:

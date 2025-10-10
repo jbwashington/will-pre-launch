@@ -14,7 +14,7 @@
    Option A: Using Supabase CLI
    ```bash
    # Install Supabase CLI
-   npm install -g supabase
+   bun install -g supabase
 
    # Login to Supabase
    supabase login
@@ -50,7 +50,7 @@
 
 ```bash
 # Install Vercel CLI
-npm i -g vercel
+bun install -g vercel
 
 # Login
 vercel login
@@ -138,8 +138,8 @@ vercel --prod
 1. Check all environment variables are set correctly
 2. Ensure all dependencies are installed:
    ```bash
-   rm -rf node_modules package-lock.json
-   npm install
+   rm -rf node_modules bun.lockb
+   bun install
    ```
 
 ### Supabase Connection Issues

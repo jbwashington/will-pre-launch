@@ -6,7 +6,11 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy:cloudflare": "npm run build && wrangler pages deploy .next --project-name=will-exotic-snacks",
+    "deploy:vercel": "vercel --prod",
+    "cf:login": "wrangler login",
+    "cf:deploy": "wrangler pages deploy .next --project-name=will-exotic-snacks"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.65.0",

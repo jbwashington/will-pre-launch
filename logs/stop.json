@@ -6,5 +6,13 @@
     "permission_mode": "bypassPermissions",
     "hook_event_name": "Stop",
     "stop_hook_active": false
+  },
+  {
+    "session_id": "13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f",
+    "transcript_path": "/Users/jbwashington/.claude/projects/-Users-jbwashington-Developer-projects-will-pre-launch/13c494ce-cc7b-46d2-9d3e-8b28d96e2b5f.jsonl",
+    "cwd": "/Users/jbwashington/Developer/projects/will-pre-launch",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "Stop",
+    "stop_hook_active": false
   }
 ]

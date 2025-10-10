@@ -10,3 +10,8 @@ database_id = "cd638958-3fd7-46e5-b803-3b40ded43340"
 
 [env.production]
 vars = { NODE_ENV = "production" }
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "will-exotic-snacks-db"
+database_id = "cd638958-3fd7-46e5-b803-3b40ded43340"

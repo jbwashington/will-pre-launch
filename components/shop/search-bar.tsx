@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import { Search, Loader2, Sparkles } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-// Use HuggingFace generator for compatibility
-import { generateProduct } from '@/lib/ai/huggingface-generator'
+// Use browser-based Transformers.js (100% free, client-side)
+import { generateProduct } from '@/lib/ai/browser-generator'
 import { useShopStore } from '@/lib/stores/shop-store'
 import type { SnackProduct } from '@/lib/ai/types'
 

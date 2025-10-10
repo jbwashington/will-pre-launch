@@ -7,9 +7,8 @@ import { SearchBar } from '@/components/shop/search-bar'
 import { ProductCard, ProductCardSkeleton } from '@/components/shop/product-card'
 import { Button } from '@/components/ui/button'
 import { useShopStore } from '@/lib/stores/shop-store'
-// Use HuggingFace generator as fallback for compatibility
-import { generateProducts, preloadModel } from '@/lib/ai/huggingface-generator'
-// import { preloadEmbeddingModel } from '@/lib/ai/embeddings'
+// Use browser-based Transformers.js (100% free, client-side)
+import { generateProducts, preloadModel } from '@/lib/ai/browser-generator'
 import { getAllCachedProducts, getCachedProduct } from '@/lib/ai/cache'
 import type { SnackProduct } from '@/lib/ai/types'
 
@@ -57,11 +56,6 @@ export default function ShopPage() {
           setFeaturedProducts(newProducts)
         }
 
-        // Embedding model disabled for now (compatibility issues)
-        // setModelState({ embeddingModel: 'loading' })
-        // preloadEmbeddingModel().then(() => {
-        //   setModelState({ embeddingModel: 'loaded' })
-        // })
       } catch (error) {
         console.error('Failed to initialize shop:', error)
         setModelState({ textModel: 'error' })

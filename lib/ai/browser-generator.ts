@@ -153,57 +153,103 @@ function generateNutrition(category: SnackProduct['category']): SnackProduct['nu
   }
 }
 
-async function generateSnackName(params: GenerateProductParams): Promise<string> {
-  const generator = await initTextGenerator()
-
+function generateFallbackName(params: GenerateProductParams): string {
   const category = params.category || 'chips'
   const searchTerm = params.searchTerm || ''
 
-  const prompt = searchTerm
-    ? `Create an exotic ${category} snack name with ${searchTerm}:`
-    : `Create an exotic ${category} snack name:`
+  const prefixes = ['Exotic', 'Supreme', 'Legendary', 'Ultimate', 'Divine', 'Cosmic', 'Mystical', 'Imperial', 'Royal', 'Premium']
+  const middles = ['Fusion', 'Blend', 'Mix', 'Delight', 'Sensation', 'Wave', 'Dream', 'Paradise', 'Experience', 'Journey']
+  const adjectives = ['Spicy', 'Sweet', 'Tangy', 'Savory', 'Zesty', 'Bold', 'Wild', 'Premium', 'Artisan', 'Gourmet']
 
-  const result = await generator(prompt, {
-    max_new_tokens: 20,
-    temperature: 0.9,
-    do_sample: true
-  })
+  if (searchTerm) {
+    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)]
+    const middle = middles[Math.floor(Math.random() * middles.length)]
+    return `${prefix} ${searchTerm} ${middle}`
+  } else {
+    const adjective = adjectives[Math.floor(Math.random() * adjectives.length)]
+    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)]
+    const middle = middles[Math.floor(Math.random() * middles.length)]
+    const categoryName = category.charAt(0).toUpperCase() + category.slice(1)
+    return `${adjective} ${prefix} ${categoryName} ${middle}`
+  }
+}
 
-  let name = result[0].generated_text.trim()
+async function generateSnackName(params: GenerateProductParams): Promise<string> {
+  try {
+    const generator = await initTextGenerator()
 
-  // Clean up
-  name = name.replace(/^(Name:|Snack name:|Answer:)/i, '').trim()
-  name = name.split('\n')[0].trim()
-  name = name.replace(/['"]/g, '')
+    const category = params.category || 'chips'
+    const searchTerm = params.searchTerm || ''
 
-  // Capitalize
-  name = name.split(' ').map(word =>
-    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-  ).join(' ')
+    const prompt = searchTerm
+      ? `Create an exotic ${category} snack name with ${searchTerm}:`
+      : `Create an exotic ${category} snack name:`
 
-  return name || `Exotic ${category.charAt(0).toUpperCase() + category.slice(1)} Delight`
+    const result = await generator(prompt, {
+      max_new_tokens: 20,
+      temperature: 0.9,
+      do_sample: true
+    })
+
+    let name = result[0].generated_text.trim()
+
+    // Clean up
+    name = name.replace(/^(Name:|Snack name:|Answer:)/i, '').trim()
+    name = name.split('\n')[0].trim()
+    name = name.replace(/['"]/g, '')
+
+    // Capitalize
+    name = name.split(' ').map(word =>
+      word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+    ).join(' ')
+
+    return name || generateFallbackName(params)
+  } catch (error) {
+    console.warn('AI name generation failed, using template-based generation:', error)
+    return generateFallbackName(params)
+  }
+}
+
+function generateFallbackDescription(name: string, category: string): string {
+  const templates = [
+    `Experience the unique blend of exotic flavors in every bite of ${name}. A ${category} snack like no other.`,
+    `${name} brings together the perfect combination of taste and texture. An unforgettable ${category} experience.`,
+    `Discover the extraordinary with ${name}. This ${category} snack will transport your taste buds to new heights.`,
+    `${name} is a masterpiece of flavor engineering. Each bite delivers a unique ${category} experience you won't forget.`,
+    `Indulge in the exotic taste of ${name}. A premium ${category} snack crafted for adventurous palates.`,
+    `${name} combines traditional ${category} craftsmanship with bold, exotic ingredients for an unparalleled taste journey.`,
+    `Get ready for a flavor explosion with ${name}. This ${category} snack pushes the boundaries of taste.`,
+    `${name} is where culinary artistry meets ${category} perfection. Prepare for an extraordinary taste adventure.`
+  ]
+
+  return templates[Math.floor(Math.random() * templates.length)]
 }
 
 async function generateDescription(name: string, category: string): Promise<string> {
-  const generator = await initTextGenerator()
+  try {
+    const generator = await initTextGenerator()
 
-  const prompt = `Describe this ${category} snack "${name}":`
+    const prompt = `Describe this ${category} snack "${name}":`
 
-  const result = await generator(prompt, {
-    max_new_tokens: 50,
-    temperature: 0.8
-  })
+    const result = await generator(prompt, {
+      max_new_tokens: 50,
+      temperature: 0.8
+    })
 
-  let description = result[0].generated_text.trim()
-  description = description.replace(/^(Description:|Answer:)/i, '').trim()
+    let description = result[0].generated_text.trim()
+    description = description.replace(/^(Description:|Answer:)/i, '').trim()
 
-  if (!description.endsWith('.')) {
-    description += '.'
+    if (!description.endsWith('.')) {
+      description += '.'
+    }
+
+    description = description.charAt(0).toUpperCase() + description.slice(1)
+
+    return description || generateFallbackDescription(name, category)
+  } catch (error) {
+    console.warn('AI description generation failed, using template-based generation:', error)
+    return generateFallbackDescription(name, category)
   }
-
-  description = description.charAt(0).toUpperCase() + description.slice(1)
-
-  return description
 }
 
 function generateIngredients(category: SnackProduct['category']): string[] {

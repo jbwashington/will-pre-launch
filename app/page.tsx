@@ -1,189 +1,249 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import confetti from "canvas-confetti"
-import { Sparkles, Users, Gift, Share2, TrendingUp, ShoppingBag } from "lucide-react"
-import { WaitlistForm } from "@/components/waitlist-form"
-import { ShareDialog } from "@/components/share-dialog"
+import { Sparkles, MapPin, Store, Lightbulb, Heart } from "lucide-react"
+import { SearchBar } from "@/components/shop/search-bar"
+import { ProductCard, ProductCardSkeleton } from "@/components/shop/product-card"
+import { preloadModelInBackground } from "@/lib/ai/preloader"
+import { generateProducts, isModelLoaded } from "@/lib/ai/browser-generator"
+import { getAllCachedProducts, getCachedProduct } from "@/lib/ai/cache"
+import { useShopStore } from "@/lib/stores/shop-store"
+import type { SnackProduct } from "@/lib/ai/types"
 
 export default function Home() {
-  const [showWaitlist, setShowWaitlist] = useState(false)
-  const [userPosition, setUserPosition] = useState<number | null>(null)
-  const [referralCode, setReferralCode] = useState<string | null>(null)
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true)
+  const { featuredProducts, setFeaturedProducts } = useShopStore()
 
-  const handleJoinSuccess = (position: number, code: string) => {
-    setUserPosition(position)
-    setReferralCode(code)
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    })
-  }
+  // Preload AI model and generate initial products
+  useEffect(() => {
+    async function initialize() {
+      try {
+        // Start preloading AI model in background
+        preloadModelInBackground()
+
+        // Check for cached products first
+        const cachedIds = await getAllCachedProducts()
+
+        if (cachedIds.length >= 8) {
+          // Load from cache for instant display
+          const products = await Promise.all(
+            cachedIds.slice(0, 12).map(id => getCachedProduct(id))
+          )
+          const validProducts = products.filter((p): p is SnackProduct => p !== null)
+          setFeaturedProducts(validProducts)
+          setIsLoadingProducts(false)
+        } else {
+          // Generate initial products
+          const newProducts = await generateProducts(12)
+          setFeaturedProducts(newProducts)
+          setIsLoadingProducts(false)
+        }
+      } catch (error) {
+        console.error('Failed to initialize products:', error)
+        setIsLoadingProducts(false)
+      }
+    }
+
+    initialize()
+  }, [setFeaturedProducts])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+      {/* Top Banner */}
+      <div className="bg-gradient-to-r from-orange-600 to-red-600 text-white text-center py-2 px-4 text-sm font-medium">
+        <Sparkles className="inline w-4 h-4 mr-2" />
+        AI-Powered Snack Discovery • Help Us Build the Perfect Store!
+      </div>
 
-        <div className="relative max-w-7xl mx-auto">
+      {/* Header/Navigation */}
+      <header className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
+                <Store className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="font-bold text-lg">Will's Exotic Snacks</h1>
+                <p className="text-xs text-gray-500">NYC's Premier Snack Shop</p>
+              </div>
+            </div>
+
+            {/* Visit Store CTA */}
+            <Button
+              size="sm"
+              className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
+            >
+              <MapPin className="w-4 h-4 mr-2" />
+              Visit Our Store
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section with Search */}
+      <section className="relative overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
+            className="text-center mb-8"
           >
-            {/* Logo/Brand */}
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 mb-8 px-4 py-2 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white"
-            >
-              <Sparkles className="w-5 h-5" />
-              <span className="font-bold">Will's Exotic Snacks</span>
-            </motion.div>
-
-            {/* Main Headline */}
-            <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight mb-6">
+            <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-red-600">
-                NYC's Hottest
+                Discover Exotic Snacks
               </span>
-              <br />
-              <span className="text-gray-900 dark:text-white">
-                Exotic Snack Delivery
-              </span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-12 max-w-3xl mx-auto">
-              From the barber chair to your doorstep. Will's bringing you the
-              <span className="font-bold text-orange-600"> world's most fire snacks</span> -
-              coming to NYC neighborhoods soon.
+            </h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+              Imagine your perfect snack with AI, then find it at our NYC store.
+              Your searches help us stock what you want!
             </p>
 
-            {/* CTA Section */}
-            {!userPosition ? (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="space-y-4"
-              >
-                {!showWaitlist ? (
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Button
-                      onClick={() => setShowWaitlist(true)}
-                      size="lg"
-                      className="text-lg px-8 py-6 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 shadow-xl"
-                    >
-                      Join the Waitlist
-                      <Users className="ml-2 w-5 h-5" />
-                    </Button>
-                    <Button
-                      onClick={() => window.location.href = '/shop'}
-                      size="lg"
-                      variant="outline"
-                      className="text-lg px-8 py-6 border-2 border-orange-600 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20"
-                    >
-                      <ShoppingBag className="mr-2 w-5 h-5" />
-                      Browse Imaginary Shop
-                      <Sparkles className="ml-2 w-4 h-4" />
-                    </Button>
-                  </div>
-                ) : (
-                  <WaitlistForm onSuccess={handleJoinSuccess} />
-                )}
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8"
-              >
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white mb-4">
-                    <Gift className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2">You're In!</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">
-                    You're #{userPosition} on the waitlist
-                  </p>
-                  <div className="bg-orange-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
-                    <p className="text-sm font-medium mb-2">Your Referral Code</p>
-                    <p className="text-2xl font-bold font-mono text-orange-600">
-                      {referralCode}
-                    </p>
-                  </div>
-                  <ShareDialog referralCode={referralCode!} position={userPosition} />
-                </div>
-              </motion.div>
-            )}
-          </motion.div>
+            {/* Search Bar */}
+            <div className="max-w-3xl mx-auto mb-6">
+              <SearchBar />
+            </div>
 
-          {/* Features Grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
-            {[
-              {
-                icon: <Sparkles className="w-8 h-8" />,
-                title: "Exotic Selection",
-                description: "Rare snacks from around the world, curated by Will himself"
-              },
-              {
-                icon: <TrendingUp className="w-8 h-8" />,
-                title: "Trending Flavors",
-                description: "Stay ahead with viral TikTok and YouTube snack trends"
-              },
-              {
-                icon: <Users className="w-8 h-8" />,
-                title: "Community Driven",
-                description: "Join NYC's growing exotic snack community"
-              }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 + index * 0.1 }}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-white mb-4">
-                  {feature.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
+            {/* AI Info Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-100 dark:bg-orange-900/20 text-orange-700 dark:text-orange-300 text-sm">
+              <Lightbulb className="w-4 h-4" />
+              <span>All products are AI-imagined • Help us decide what to stock!</span>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Social Proof Section */}
+      {/* Featured Products Grid */}
+      <section className="py-8 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-6">
+            <h3 className="text-2xl font-bold">Trending Discoveries</h3>
+            <p className="text-sm text-gray-500">AI-Generated • Help Us Stock These!</p>
+          </div>
+
+          {isLoadingProducts ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {Array.from({ length: 12 }).map((_, i) => (
+                <ProductCardSkeleton key={i} />
+              ))}
+            </div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            >
+              {featuredProducts.slice(0, 12).map((product, index) => (
+                <motion.div
+                  key={product.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  <ProductCard product={product} />
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </div>
+      </section>
+
+      {/* Store Location CTA Section */}
       <section className="py-16 px-4 bg-gradient-to-r from-orange-600 to-red-600 text-white">
-        <div className="max-w-7xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
+            <Store className="w-16 h-16 mx-auto mb-6" />
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              Join the Movement
+              Visit Will's Exotic Snacks in NYC
             </h2>
-            <p className="text-xl opacity-90">
-              Be part of NYC's exotic snack revolution
+            <p className="text-xl opacity-90 mb-8">
+              Browse AI-imagined snacks online, find real exotic treats in-store.
+              Your searches help us stock what YOU want!
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                variant="secondary"
+                className="text-lg px-8 py-6"
+              >
+                <MapPin className="mr-2 w-5 h-5" />
+                Get Directions
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-lg px-8 py-6 border-2 border-white text-white hover:bg-white hover:text-orange-600"
+              >
+                <Heart className="mr-2 w-5 h-5" />
+                Save Favorites
+              </Button>
+            </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">How It Works</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300">
+              From AI imagination to real store shelves
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                step: "1",
+                icon: <Sparkles className="w-8 h-8" />,
+                title: "Imagine with AI",
+                description: "Search for snacks you dream about. Our AI generates creative possibilities."
+              },
+              {
+                step: "2",
+                icon: <Heart className="w-8 h-8" />,
+                title: "Vote & Share",
+                description: "Star your favorites, share with friends. Popular items get prioritized."
+              },
+              {
+                step: "3",
+                icon: <Store className="w-8 h-8" />,
+                title: "Find In-Store",
+                description: "Visit our NYC location to discover real exotic snacks inspired by your searches!"
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg text-center"
+              >
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-red-500 text-white text-xl font-bold mb-4">
+                  {item.step}
+                </div>
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-lg bg-orange-100 dark:bg-orange-900/20 text-orange-600 mb-4">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

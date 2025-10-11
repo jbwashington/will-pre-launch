@@ -8,7 +8,7 @@ import { ProductCard, ProductCardSkeleton } from '@/components/shop/product-card
 import { Button } from '@/components/ui/button'
 import { useShopStore } from '@/lib/stores/shop-store'
 // Use browser-based Transformers.js (100% free, client-side)
-import { generateProducts, preloadModel } from '@/lib/ai/browser-generator'
+import { generateProducts, preloadModel, isModelLoaded } from '@/lib/ai/browser-generator'
 import { getAllCachedProducts, getCachedProduct } from '@/lib/ai/cache'
 import type { SnackProduct } from '@/lib/ai/types'
 

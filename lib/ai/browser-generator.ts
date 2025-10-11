@@ -17,14 +17,28 @@ async function loadTransformers() {
       throw new Error('Transformers.js requires browser environment')
     }
 
-    const { pipeline, env } = await import('@xenova/transformers')
+    const module = await import('@xenova/transformers')
 
-    // Configure for browser
-    env.allowLocalModels = false
-    env.useBrowserCache = true
-    env.backends.onnx.wasm.proxy = false
+    // Handle both default and named exports
+    const transformers = module.default || module
 
-    return { pipeline, env }
+    // Safely configure Transformers.js if env exists
+    if (transformers?.env) {
+      transformers.env.allowLocalModels = false
+      transformers.env.useBrowserCache = true
+      if (transformers.env.backends?.onnx?.wasm) {
+        transformers.env.backends.onnx.wasm.proxy = false
+      }
+    }
+
+    // Extract pipeline function
+    const pipeline = transformers.pipeline || transformers.default?.pipeline
+
+    if (!pipeline) {
+      throw new Error('Pipeline function not found in Transformers.js module')
+    }
+
+    return { pipeline, env: transformers.env }
   })()
 
   return transformersPromise
@@ -60,7 +74,18 @@ async function initTextGenerator() {
     isLoading = true
     console.log('🤖 Loading browser-based AI model...')
 
-    const { pipeline } = await loadTransformers()
+    const transformersModule = await loadTransformers()
+
+    if (!transformersModule) {
+      throw new Error('Failed to load Transformers.js module')
+    }
+
+    // Extract pipeline function
+    const pipeline = transformersModule.pipeline
+
+    if (!pipeline) {
+      throw new Error('Pipeline function not found in Transformers.js module')
+    }
 
     // Use smaller model for faster loading
     textGenerator = await pipeline(
@@ -71,6 +96,9 @@ async function initTextGenerator() {
 
     console.log('✅ AI model loaded successfully!')
     return textGenerator
+  } catch (error) {
+    console.error('Failed to initialize text generator:', error)
+    throw error
   } finally {
     isLoading = false
   }

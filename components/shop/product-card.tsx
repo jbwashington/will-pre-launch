@@ -1,6 +1,5 @@
 "use client"
 
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Star, ShoppingCart, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -40,8 +39,7 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05, duration: 0.3 }}
     >
-      <Link href={`/shop/${product.id}`}>
-        <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col">
+      <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-gray-700 h-full flex flex-col cursor-pointer">
           {/* Star Button - Top Right */}
           <button
             onClick={handleStarClick}
@@ -125,7 +123,6 @@ export function ProductCard({ product, index = 0 }: ProductCardProps) {
             )}
           </div>
         </div>
-      </Link>
     </motion.div>
   )
 }
